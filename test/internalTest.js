@@ -16,7 +16,6 @@ for (const supportedVersion of mineflayer.testedVersions) {
 
   const hasSignedChat = registry.supportFeature('signedChat')
   function chatText (text) {
-    // TODO: move this to prismarine-chat in a new ChatMessage(text).toNotch(asNbt) method
     return registry.supportFeature('chatPacketsUseNbtComponents')
       ? nbt.comp({ text: nbt.string(text) })
       : JSON.stringify({ text })
@@ -1246,7 +1245,6 @@ for (const supportedVersion of mineflayer.testedVersions) {
             done()
           })
         })
-        // TODO: figure out how the "extra" should be encoded in NBT so this branch can be removed
         if (registry.supportFeature('chatPacketsUseNbtComponents')) {
           server.on('playerJoin', (client) => {
             client.write('playerlist_header', {

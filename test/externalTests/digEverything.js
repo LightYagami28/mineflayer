@@ -70,7 +70,6 @@ async function digSomething (blockId, bot) {
 
   await bot.test.setInventorySlot(36, new Item(blockId, 1, 0))
   await bot.test.placeBlock(36, bot.entity.position.plus(new Vec3(1, 0, 0)))
-  // TODO: find a better way than this bot.test.wait(200)
   await bot.test.wait(200)
   await bot.test.clearInventory()
   await bot.test.setInventorySlot(36, new Item(bot.registry.itemsByName.diamond_pickaxe.id, 1, 0))
