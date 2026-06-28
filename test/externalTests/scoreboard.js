@@ -2,7 +2,7 @@
 // const { once } = require('../../lib/promise_utils')
 
 module.exports = () => async (bot) => {
-  // TODO: This is failing randomly, investigate and fix
+  // Scoreboard tests are disabled due to intermittent failures
   /* bot.test.sayEverywhere('/scoreboard objectives add test1 health')
   bot.test.sayEverywhere('/scoreboard objectives add test2 deathCount')
   bot.test.sayEverywhere('/scoreboard objectives add test3 dummy')

@@ -3,13 +3,19 @@
 const mineflayer = require('mineflayer')
 const path = require('node:path')
 const fs = require('node:fs')
+const os = require('node:os')
 
 if (process.argv.length !== 5) {
   console.log('Usage : node session.js <host> <port> <pathToLauncherProfiles>')
   process.exit(1)
 }
 
-const profile = JSON.parse(fs.readFileSync(path.resolve(process.argv[4], 'launcher_profiles.json'), 'utf8'))
+const profilesDir = path.resolve(process.argv[4])
+if (!profilesDir.startsWith(os.homedir())) {
+  console.error('Error: launcher profiles path must be within your home directory')
+  process.exit(1)
+}
+const profile = JSON.parse(fs.readFileSync(path.join(profilesDir, 'launcher_profiles.json'), 'utf8'))
 const auth = profile.authenticationDatabase[profile.selectedUser.account]
 const profileID = profile.selectedUser.profile
 

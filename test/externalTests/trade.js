@@ -3,8 +3,7 @@ const { once } = require('../../lib/promise_utils')
 
 module.exports = () => async (bot) => {
   function expectAmount (amount, greaterThan) {
-    // TODO: 1.20.5+ does not seem to respect "Count" NBT anymore in /summon
-    // ...as NBT was removed in favor of components that may have something to do
+    // 1.20.5+ ignores "Count" NBT in /summon; NBT was replaced by components
     if (bot.registry.version['>=']('1.20.5')) {
       if (amount < 1) throw new Error(`${amount} < 1`) // accept anything >=1
     } else {
