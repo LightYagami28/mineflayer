@@ -21,7 +21,7 @@ console.log('Commands :\n' +
 
 const bot = mineflayer.createBot({
   host: process.argv[2],
-  port: parseInt(process.argv[3]),
+  port: Number.parseInt(process.argv[3]),
   username: process.argv[4] ? process.argv[4] : 'trader',
   password: process.argv[5]
 })

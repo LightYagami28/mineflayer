@@ -31,7 +31,7 @@ const mineflayer = require('mineflayer')
 // bot options
 const options = {
   host: process.argv[4],
-  port: parseInt(process.argv[5]),
+  port: Number.parseInt(process.argv[5]),
   username: process.argv[6] || 'discord',
   auth: process.argv[7] || 'offline'
 }

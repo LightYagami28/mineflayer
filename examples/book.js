@@ -7,7 +7,7 @@ if (process.argv.length < 4 || process.argv.length > 6) {
 
 const bot = mineflayer.createBot({
   host: process.argv[2],
-  port: parseInt(process.argv[3]),
+  port: Number.parseInt(process.argv[3]),
   username: process.argv[4] ? process.argv[4] : 'book',
   password: process.argv[5]
 })
@@ -40,12 +40,12 @@ bot.on('chat', (username, message) => {
 })
 
 function toss () {
-  const [book] = bot.inventory.items().filter(({ name }) => name === 'writable_book')
+  const book = bot.inventory.items().find(({ name }) => name === 'writable_book')
   bot.tossStack(book)
 }
 
 async function write () {
-  const [book] = bot.inventory.items().filter(({ name }) => name === 'writable_book')
+  const book = bot.inventory.items().find(({ name }) => name === 'writable_book')
   if (!book) {
     bot.chat("I don't have a book.")
     return
@@ -55,6 +55,6 @@ async function write () {
 }
 
 function print () {
-  const [book] = bot.inventory.items().filter(({ name }) => name === 'writable_book')
+  const book = bot.inventory.items().find(({ name }) => name === 'writable_book')
   book.nbt.value.pages.value.value.forEach((page, i) => bot.chat(`Page ${i + 1}: ${page.replace(/§[a-z0-9]/g, '')}`))
 }

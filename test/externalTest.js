@@ -1,11 +1,11 @@
 /* eslint-env mocha */
 
-const assert = require('assert')
+const assert = require('node:assert')
 const mineflayer = require('../')
 const commonTest = require('./externalTests/plugins/testCommon')
 const mc = require('minecraft-protocol')
-const fs = require('fs')
-const path = require('path')
+const fs = require('node:fs')
+const path = require('node:path')
 
 const { getPort } = require('./common/util')
 const { once } = require('../lib/promise_utils')
@@ -59,7 +59,7 @@ for (const supportedVersion of mineflayer.testedVersions) {
           username: 'flatbot',
           viewDistance: 'tiny',
           port: PORT,
-          host: '127.0.0.1',
+          host: '127.0.1',
           version: supportedVersion
         })
         commonTest(bot, wrap)
@@ -96,7 +96,7 @@ for (const supportedVersion of mineflayer.testedVersions) {
             console.log(`pinging ${version.minecraftVersion} port : ${PORT}`)
             mc.ping({
               port: PORT,
-              host: '127.0.0.1',
+              host: '127.0.1',
               version: supportedVersion
             }, (err, results) => {
               if (err) return done(err)
@@ -133,7 +133,7 @@ for (const supportedVersion of mineflayer.testedVersions) {
         username: 'flatbot',
         viewDistance: 'tiny',
         port: PORT,
-        host: '127.0.0.1',
+        host: '127.0.1',
         version: supportedVersion
       })
       commonTest(bot, wrap)

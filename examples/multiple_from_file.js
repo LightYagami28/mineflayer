@@ -4,8 +4,8 @@
 * change the file property of config to set your .txt file location
 */
 
-const fs = require('fs')
-const util = require('util')
+const fs = require('node:fs')
+const util = require('node:util')
 const mineflayer = require('mineflayer')
 const readFile = (fileName) => util.promisify(fs.readFile)(fileName, 'utf8')
 
@@ -27,7 +27,7 @@ function makeBot ([_u, _p], ix) {
       })
       bot.on('spawn', () => resolve(bot))
       bot.on('error', (err) => reject(err))
-      setTimeout(() => reject(Error('Took too long to spawn.')), 5000) // 5 sec
+      setTimeout(() => reject(new Error('Took too long to spawn.')), 5000) // 5 sec
     }, config.interval * ix)
   })
 }

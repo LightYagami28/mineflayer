@@ -22,14 +22,14 @@ if (process.argv.length < 4 || process.argv.length > 6) {
 
 const bot = mineflayer.createBot({
   host: process.argv[2],
-  port: parseInt(process.argv[3]),
+  port: Number.parseInt(process.argv[3]),
   username: process.argv[4] ? process.argv[4] : 'chatterbox',
   password: process.argv[5]
 })
 
 bot.on('chat', (username, message) => {
   if (username === bot.username) return
-  const result = /canSee (-?[0-9]+),(-?[0-9]+),(-?[0-9]+)/.exec(message)
+  const result = /canSee (-?\d+),(-?\d+),(-?\d+)/.exec(message)
   if (result) {
     canSee(new Vec3(result[1], result[2], result[3]))
     return
@@ -48,7 +48,7 @@ bot.on('chat', (username, message) => {
       saySpawnPoint()
       break
     case 'block':
-      sayBlockUnder(username)
+      sayBlockUnder()
       break
     case 'quit':
       quit(username)
@@ -170,7 +170,7 @@ bot.on('playerLeft', (player) => {
 bot.on('playerCollect', (collector, collected) => {
   if (collector.type === 'player') {
     const item = collected.getDroppedItem()
-    bot.chat(`${collector.username !== bot.username ? ("I'm so jealous. " + collector.username) : 'I '} collected ${item.count} ${item.displayName}`)
+    bot.chat(`${collector.username === bot.username ? 'I ' : ("I'm so jealous. " + collector.username)} collected ${item.count} ${item.displayName}`)
   }
 })
 

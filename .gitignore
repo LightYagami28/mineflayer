@@ -38,3 +38,4 @@ GEMINI.md
 .claude/skills/generated/gortex-test-externaltests-plugins/SKILL.md
 .gemini/settings.json
 .github/copilot-instructions.md
+.github/instructions/sonarqube_mcp.instructions.md

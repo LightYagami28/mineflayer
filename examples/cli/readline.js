@@ -17,7 +17,7 @@ const readline = require('node:readline') // load the node.js readline module
 // bot options
 const options = {
   host: process.argv[2],
-  port: parseInt(process.argv[3]),
+  port: Number.parseInt(process.argv[3]),
   username: process.argv[4] || 'readline',
   auth: process.argv[5] || 'offline'
 }

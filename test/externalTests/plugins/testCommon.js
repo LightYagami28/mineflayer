@@ -1,9 +1,9 @@
 const { Vec3 } = require('vec3')
 
-const { spawn } = require('child_process')
+const { spawn } = require('node:child_process')
 const { once } = require('../../../lib/promise_utils')
 const process = require('process')
-const assert = require('assert')
+const assert = require('node:assert')
 const { sleep, onceWithCleanup } = require('../../../lib/promise_utils')
 
 const timeout = 5000
@@ -206,7 +206,7 @@ function inject (bot, wrap) {
       return run(childBotName)
     }
 
-    const child = spawn('node', [file, '127.0.0.1', `${bot.test.port}`])
+    const child = spawn('node', [file, '127.0.1', `${bot.test.port}`])
 
     // Useful to debug child processes:
     child.stdout.on('data', (data) => { console.log(`${data}`) })

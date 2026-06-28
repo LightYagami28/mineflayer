@@ -2,11 +2,11 @@
 /**
  * Updator script triggered from minecraft-data repository to auto generate PR
  */
-const fs = require('fs')
-const cp = require('child_process')
-const assert = require('assert')
+const fs = require('node:fs')
+const cp = require('node:child_process')
+const assert = require('node:assert')
 const github = require('gh-helpers')()
-const { join } = require('path')
+const { join } = require('node:path')
 const exec = (cmd) => github.mock ? console.log('> ', cmd) : (console.log('> ', cmd), cp.execSync(cmd, { stdio: 'inherit' }))
 
 console.log('Starting update process...')

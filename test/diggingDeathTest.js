@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 
-const EventEmitter = require('events')
-const assert = require('assert')
+const EventEmitter = require('node:events')
+const assert = require('node:assert')
 const inject = require('../lib/plugins/digging')
 
 describe('digging plugin death handler', () => {

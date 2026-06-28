@@ -1,4 +1,4 @@
-const assert = require('assert')
+const assert = require('node:assert')
 
 module.exports = () => async (bot) => {
   const particleData = bot.registry.particles[0]

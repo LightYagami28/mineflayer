@@ -1,4 +1,4 @@
-const assert = require('assert')
+const assert = require('node:assert')
 const Vec3 = require('vec3')
 
 module.exports = () => async (bot) => {

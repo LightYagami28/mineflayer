@@ -1,14 +1,15 @@
 // This example describes how to login using a launcher_profiles folder instead of a usual minecraft username & password
 
 const mineflayer = require('mineflayer')
-const path = require('path')
+const path = require('node:path')
+const fs = require('node:fs')
 
 if (process.argv.length !== 5) {
   console.log('Usage : node session.js <host> <port> <pathToLauncherProfiles>')
   process.exit(1)
 }
 
-const profile = require(path.resolve(process.argv[4], 'launcher_profiles.json'))
+const profile = JSON.parse(fs.readFileSync(path.resolve(process.argv[4], 'launcher_profiles.json'), 'utf8'))
 const auth = profile.authenticationDatabase[profile.selectedUser.account]
 const profileID = profile.selectedUser.profile
 
@@ -23,7 +24,7 @@ const session = {
 
 const bot = mineflayer.createBot({
   host: process.argv[2],
-  port: parseInt(process.argv[3]),
+  port: Number.parseInt(process.argv[3]),
   session
 })
 

@@ -20,7 +20,7 @@ next()
 function createBot (name) {
   mineflayer.createBot({
     host: process.argv[2],
-    port: parseInt(process.argv[3]),
+    port: Number.parseInt(process.argv[3]),
     username: name
   })
 }

@@ -4,7 +4,7 @@
  */
 
 const mineflayer = require('mineflayer')
-const fs = require('fs')
+const fs = require('node:fs')
 
 if (process.argv.length < 4 || process.argv.length > 6) {
   console.log('Usage : node saver.js <host> <port> [<name>] [<password>]')
@@ -13,12 +13,12 @@ if (process.argv.length < 4 || process.argv.length > 6) {
 
 const bot = mineflayer.createBot({
   host: process.argv[2],
-  port: parseInt(process.argv[3]),
+  port: Number.parseInt(process.argv[3]),
   username: process.argv[4] ? process.argv[4] : 'saver',
   password: process.argv[5],
   storageBuilder: ({ version, worldName }) => {
     const Anvil = require('prismarine-provider-anvil').Anvil(version)
-    worldName = worldName.replace(/:/g, '_')
+    worldName = worldName.replaceAll(':', '_')
     fs.mkdirSync(worldName)
     return new Anvil(worldName)
   }

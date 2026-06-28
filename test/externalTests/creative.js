@@ -1,5 +1,5 @@
-const assert = require('assert')
-const wait = require('util').promisify(setTimeout)
+const assert = require('node:assert')
+const wait = require('node:util').promisify(setTimeout)
 const SLOT = 36
 
 module.exports = () => async (bot) => {

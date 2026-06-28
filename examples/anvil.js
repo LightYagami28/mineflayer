@@ -24,7 +24,7 @@ if (process.argv.length < 4 || process.argv.length > 6) {
 
 const bot = mineflayer.createBot({
   host: process.argv[2],
-  port: parseInt(process.argv[3]),
+  port: Number.parseInt(process.argv[3]),
   username: process.argv[4] ? process.argv[4] : 'anvilman',
   password: process.argv[5]
 })
@@ -60,27 +60,24 @@ bot.on('chat', async (username, message) => {
 })
 
 async function tossItem (name, amount) {
-  amount = parseInt(amount, 10)
+  amount = Number.parseInt(amount, 10)
   const item = itemByName(name)
-  if (!item) {
-    bot.chat(`I have no ${name}`)
-  } else {
-    try {
-      if (amount) {
-        await bot.toss(item.type, null, amount)
-        bot.chat(`tossed ${amount} x ${name}`)
-      } else {
-        await bot.tossStack(item)
-        bot.chat(`tossed ${name}`)
-      }
-    } catch (err) {
-      bot.chat(`unable to toss: ${err.message}`)
+  if (!item) { bot.chat(`I have no ${name}`); return }
+  try {
+    if (amount) {
+      await bot.toss(item.type, null, amount)
+      bot.chat(`tossed ${amount} x ${name}`)
+    } else {
+      await bot.tossStack(item)
+      bot.chat(`tossed ${name}`)
     }
+  } catch (err) {
+    bot.chat(`unable to toss: ${err.message}`)
   }
 }
 
 function itemByName (name) {
-  return bot.inventory.items().filter(item => item.name === name)[0]
+  return bot.inventory.items().find(item => item.name === name)
 }
 
 function itemToString (item) {
@@ -103,8 +100,7 @@ function sayItems (items = bot.inventory.items()) {
 function getAnvilIds () {
   const matchingBlocks = [bot.registry.blocksByName.anvil.id]
   if (bot.registry.blocksByName?.chipped_anvil) {
-    matchingBlocks.push(bot.registry.blocksByName.chipped_anvil.id)
-    matchingBlocks.push(bot.registry.blocksByName.damaged_anvil.id)
+    matchingBlocks.push(bot.registry.blocksByName.chipped_anvil.id, bot.registry.blocksByName.damaged_anvil.id)
   }
   return matchingBlocks
 }

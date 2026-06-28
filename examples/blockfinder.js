@@ -3,7 +3,7 @@
  */
 const mineflayer = require('mineflayer')
 
-const { performance } = require('perf_hooks')
+const { performance } = require('node:perf_hooks')
 
 if (process.argv.length < 4 || process.argv.length > 6) {
   console.log('Usage : node blockfinder.js <host> <port> [<name>] [<password>]')
@@ -12,7 +12,7 @@ if (process.argv.length < 4 || process.argv.length > 6) {
 
 const bot = mineflayer.createBot({
   host: process.argv[2],
-  port: parseInt(process.argv[3]),
+  port: Number.parseInt(process.argv[3]),
   username: process.argv[4] ? process.argv[4] : 'finder',
   password: process.argv[5]
 })

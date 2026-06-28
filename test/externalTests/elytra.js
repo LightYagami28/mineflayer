@@ -1,4 +1,4 @@
-const assert = require('assert')
+const assert = require('node:assert')
 
 module.exports = () => async (bot) => {
   // don't continue unless this version supports elytra
