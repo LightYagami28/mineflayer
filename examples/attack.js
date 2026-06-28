@@ -12,7 +12,7 @@ if (process.argv.length < 4 || process.argv.length > 6) {
 
 const bot = mineflayer.createBot({
   host: process.argv[2],
-  port: parseInt(process.argv[3]),
+  port: Number.parseInt(process.argv[3]),
   username: process.argv[4] ? process.argv[4] : 'attack',
   password: process.argv[5]
 })
@@ -26,7 +26,7 @@ bot.on('spawn', () => {
 
 function attackPlayer (username) {
   const player = bot.players[username]
-  if (!player || !player.entity) {
+  if (!player?.entity) {
     bot.chat('I can\'t see you')
   } else {
     bot.chat(`Attacking ${player.username}`)
@@ -36,10 +36,7 @@ function attackPlayer (username) {
 
 function attackEntity () {
   const entity = bot.nearestEntity()
-  if (!entity) {
-    bot.chat('No nearby entities')
-  } else {
-    bot.chat(`Attacking ${entity.name ?? entity.username}`)
-    bot.attack(entity)
-  }
+  if (!entity) { bot.chat('No nearby entities'); return }
+  bot.chat(`Attacking ${entity.name ?? entity.username}`)
+  bot.attack(entity)
 }

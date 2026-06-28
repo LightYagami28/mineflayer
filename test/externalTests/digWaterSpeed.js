@@ -1,5 +1,5 @@
 const { Vec3 } = require('vec3')
-const assert = require('assert')
+const assert = require('node:assert')
 
 module.exports = () => async (bot) => {
   const groundY = bot.test.groundY

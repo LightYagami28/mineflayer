@@ -14,7 +14,7 @@ if (process.argv.length < 4 || process.argv.length > 6) {
 
 const bot = mineflayer.createBot({
   host: process.argv[2],
-  port: parseInt(process.argv[3]),
+  port: Number.parseInt(process.argv[3]),
   username: process.argv[4] ? process.argv[4] : 'jumper',
   password: process.argv[5]
 })
@@ -74,16 +74,16 @@ bot.on('chat', (username, message) => {
       bot.dismount()
       break
     case 'move vehicle forward':
-      bot.moveVehicle(0.0, 1.0)
+      bot.moveVehicle(0, 1.0)
       break
     case 'move vehicle backward':
-      bot.moveVehicle(0.0, -1.0)
+      bot.moveVehicle(0, -1.0)
       break
     case 'move vehicle left':
-      bot.moveVehicle(1.0, 0.0)
+      bot.moveVehicle(1.0, 0)
       break
     case 'move vehicle right':
-      bot.moveVehicle(-1.0, 0.0)
+      bot.moveVehicle(-1.0, 0)
       break
     case 'tp':
       bot.entity.position.y += 10

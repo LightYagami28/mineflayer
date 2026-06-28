@@ -1,4 +1,4 @@
-const assert = require('assert')
+const assert = require('node:assert')
 
 module.exports = () => async (bot) => {
   const Item = require('prismarine-item')(bot.registry)

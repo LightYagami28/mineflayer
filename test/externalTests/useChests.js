@@ -1,5 +1,5 @@
 const { Vec3 } = require('vec3')
-const assert = require('assert')
+const assert = require('node:assert')
 const { once, onceWithCleanup } = require('../../lib/promise_utils')
 
 module.exports = () => async (bot) => {

@@ -1,4 +1,4 @@
-const assert = require('assert')
+const assert = require('node:assert')
 
 module.exports = () => async (bot) => {
   await bot.test.runExample('examples/digger.js', async (name) => {

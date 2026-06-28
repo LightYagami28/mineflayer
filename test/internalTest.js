@@ -3,7 +3,7 @@
 const mineflayer = require('../')
 const vec3 = require('vec3')
 const mc = require('minecraft-protocol')
-const assert = require('assert')
+const assert = require('node:assert')
 const { sleep } = require('../lib/promise_utils')
 const nbt = require('prismarine-nbt')
 const { once } = require('../lib/promise_utils')

@@ -1,6 +1,6 @@
 // test to see if bot retains creative gamemode in bot object on death
 
-const assert = require('assert')
+const assert = require('node:assert')
 const { onceWithCleanup } = require('../../lib/promise_utils')
 
 module.exports = () => {

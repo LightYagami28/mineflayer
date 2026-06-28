@@ -17,7 +17,7 @@ const bot = mineflayer.createBot({
 bot.once('spawn', () => {
   bot.addChatPattern('bot_left_the_game', /bot. left the game/)
   bot.addChatPatternSet('bot_rejoins_the_game', [/bot. left the game/, /bot. joined the game/])
-  bot.addChatPattern('who_just_joined', /(.+) joined the game/, { parse: true, repeat: false })
+  bot.addChatPattern('who_just_joined', /([^ ]+) joined the game/, { parse: true, repeat: false })
   makeChatMessages()
 })
 

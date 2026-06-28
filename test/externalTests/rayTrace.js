@@ -1,4 +1,4 @@
-const assert = require('assert')
+const assert = require('node:assert')
 const { BlockFace } = require('prismarine-world').iterators
 
 module.exports = () => async (bot) => {
