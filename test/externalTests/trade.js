@@ -1,7 +1,11 @@
 const assert = require('node:assert')
 const { once } = require('../../lib/promise_utils')
 
-module.exports = () => async (bot) => {
+function printCountTrade (item) {
+  return `${item.count}x ${item.displayName}`
+}
+
+const tradeTest = () => async (bot) => {
   function expectAmount (amount, greaterThan) {
     // 1.20.5+ ignores "Count" NBT in /summon; NBT was replaced by components
     if (bot.registry.version['>=']('1.20.5')) {
@@ -15,10 +19,11 @@ module.exports = () => async (bot) => {
 
   const villagerType = bot.registry.entitiesByName.villager ? 'villager' : 'Villager'
   const testFluctuations = bot.supportFeature('selectingTradeMovesItems')
+  const fluctuationProps = testFluctuations ? 'demand:60,priceMultiplier:0.05f,specialPrice:-4,' : ''
 
   const summonCommand = bot.supportFeature('indexesVillagerRecipes')
     ? `/summon ${villagerType} ~ ~1 ~ {NoAI:1, Offers:{Recipes:[0:{maxUses:12,buy:{id:"minecraft:emerald",Count:2},sell:{id:"minecraft:pumpkin_pie",Count:2},uses: 1},1:{maxUses:12,buy:{id:"minecraft:emerald",Count:2},buyB:{id:"minecraft:pumpkin_pie",Count:2},sell:{id:"minecraft:wheat",Count:2}, uses:1},2:{maxUses:12,buy:{id:"minecraft:emerald",Count:1},sell:{id:"minecraft:glass",Count:4},uses: 1},3:{maxUses:12,buy:{id:"minecraft:emerald",Count:36},buyB:{id:"minecraft:book",Count:1},sell:{id:"minecraft:wooden_sword",Count:1},uses: 1}]}}`
-    : `/summon ${villagerType} ~ ~1 ~ {NoAI:1, Offers:{Recipes:[{maxUses:12,buy:{id:"minecraft:emerald",Count:2},sell:{id:"minecraft:pumpkin_pie",Count:2},${testFluctuations ? 'demand:60,priceMultiplier:0.05f,specialPrice:-4,' : ''}uses: 1},{maxUses:12,buy:{id:"minecraft:emerald",Count:2},buyB:{id:"minecraft:pumpkin_pie",Count:2},sell:{id:"minecraft:wheat",Count:2}, uses:1},{maxUses:12,buy:{id:"minecraft:emerald",Count:1},sell:{id:"minecraft:glass",Count:4},uses: 1},{maxUses:12,buy:{id:"minecraft:emerald",Count:36},buyB:{id:"minecraft:book",Count:1},sell:{id:"minecraft:wooden_sword",Count:1},uses: 1}]}}`
+    : `/summon ${villagerType} ~ ~1 ~ {NoAI:1, Offers:{Recipes:[{maxUses:12,buy:{id:"minecraft:emerald",Count:2},sell:{id:"minecraft:pumpkin_pie",Count:2},${fluctuationProps}uses: 1},{maxUses:12,buy:{id:"minecraft:emerald",Count:2},buyB:{id:"minecraft:pumpkin_pie",Count:2},sell:{id:"minecraft:wheat",Count:2}, uses:1},{maxUses:12,buy:{id:"minecraft:emerald",Count:1},sell:{id:"minecraft:glass",Count:4},uses: 1},{maxUses:12,buy:{id:"minecraft:emerald",Count:36},buyB:{id:"minecraft:book",Count:1},sell:{id:"minecraft:wooden_sword",Count:1},uses: 1}]}}`
 
   const commandBlockPos = bot.entity.position.offset(0.5, 0, 0.5)
   const redstoneBlockPos = commandBlockPos.offset(1, 0, 0)
@@ -138,9 +143,6 @@ module.exports = () => async (bot) => {
     const printCountInv = function (item) {
       return `${bot.currentWindow.count(bot.registry.itemsByName[item.name].id)}x ${item.displayName}`
     }
-    const printCountTrade = function (item) {
-      return `${item.count}x ${item.displayName}`
-    }
 
     bot.test.sayEverywhere(`I have ${printCountInv(trade.inputItem1)} ${trade.hasItem2 ? 'and ' + printCountInv(trade.inputItem2) : ''}`)
     bot.test.sayEverywhere(`I can trade ${printCountTrade(trade.inputItem1)} ${trade.hasItem2 ? 'and ' + printCountTrade(trade.inputItem2) : ''} for ${printCountTrade(trade.outputItem)}`)
@@ -150,3 +152,4 @@ module.exports = () => async (bot) => {
   villager.close()
   bot.test.sayEverywhere(`/kill @e[type=${villagerType}]`)
 }
+module.exports = tradeTest

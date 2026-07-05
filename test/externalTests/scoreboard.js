@@ -1,7 +1,7 @@
 // const assert = require('node:assert')
 // const { once } = require('../../lib/promise_utils')
 
-module.exports = () => async (bot) => {
+const scoreboardTest = () => async (bot) => {
   // Scoreboard tests are disabled due to intermittent failures
   /* bot.test.sayEverywhere('/scoreboard objectives add test1 health')
   bot.test.sayEverywhere('/scoreboard objectives add test2 deathCount')
@@ -34,3 +34,4 @@ module.exports = () => async (bot) => {
   const [scoreboard, updated] = await promise
   assert.strictEqual(scoreboard.itemsMap[bot.username], updated) */
 }
+module.exports = scoreboardTest

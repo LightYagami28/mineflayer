@@ -47,7 +47,7 @@ const excludedBlocks = [
   'obsidian'
 ]
 
-module.exports = (version) => {
+module.exports = function digEverything (version) {
   const registry = require('prismarine-registry')(version)
 
   const funcs = {}
