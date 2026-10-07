@@ -90,8 +90,7 @@ async function tossItem (name, amount) {
       bot.chat(`tossed ${name}`)
     }
   } catch (err) {
-      bot.chat(`unable to toss: ${err.message}`)
-    }
+    bot.chat(`unable to toss: ${err.message}`)
   }
 }
 

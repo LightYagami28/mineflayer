@@ -1,7 +1,5 @@
-const mineflayer = require('mineflayer')
-
 /**
- * @param {mineflayer.Bot} bot // to enable intellisense
+ * @param {import('mineflayer').Bot} bot // to enable intellisense
  */
 
 module.exports = function helloModule (bot) {
