@@ -2,30 +2,36 @@ version: 2
 updates:
   - package-ecosystem: npm
     directory: "/"
-  schedule:
-    interval: daily
-  open-pull-requests-limit: 10
-  ignore:
-    - dependency-name: "@types/node"
-      versions:
-      - 15.0.0
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
   - package-ecosystem: npm
     directory: "/examples/viewer"
     schedule:
       interval: weekly
+    open-pull-requests-limit: 5
   - package-ecosystem: npm
     directory: "/examples/anvil_saver"
     schedule:
       interval: weekly
+    open-pull-requests-limit: 5
   - package-ecosystem: npm
     directory: "/examples/place_end_crystal"
     schedule:
       interval: weekly
+    open-pull-requests-limit: 5
   - package-ecosystem: npm
     directory: "/examples/pathfinder"
     schedule:
       interval: weekly
+    open-pull-requests-limit: 5
   - package-ecosystem: npm
     directory: "/examples/screenshot-with-node-canvas-webgl"
     schedule:
       interval: weekly
+    open-pull-requests-limit: 5
+  - package-ecosystem: npm
+    directory: "/.github/helper"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5

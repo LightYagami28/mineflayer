@@ -10,12 +10,31 @@ if (process.argv.length !== 5) {
   process.exit(1)
 }
 
-const profilesDir = path.resolve(process.argv[4])
-if (!profilesDir.startsWith(os.homedir())) {
+const homeDir = fs.realpathSync(os.homedir())
+const requestedProfilesDir = path.resolve(process.argv[4])
+let profilesDir
+
+try {
+  profilesDir = fs.realpathSync(requestedProfilesDir)
+} catch {
+  console.error('Error: launcher profiles directory does not exist or cannot be accessed')
+  process.exit(1)
+}
+
+const relativeProfilesPath = path.relative(homeDir, profilesDir)
+if (relativeProfilesPath === '..' || relativeProfilesPath.startsWith(`..${path.sep}`) || path.isAbsolute(relativeProfilesPath)) {
   console.error('Error: launcher profiles path must be within your home directory')
   process.exit(1)
 }
-const profile = JSON.parse(fs.readFileSync(path.join(profilesDir, 'launcher_profiles.json'), 'utf8'))
+
+const profilePath = fs.realpathSync(path.join(profilesDir, 'launcher_profiles.json'))
+const relativeProfilePath = path.relative(profilesDir, profilePath)
+if (relativeProfilePath === '..' || relativeProfilePath.startsWith(`..${path.sep}`) || path.isAbsolute(relativeProfilePath)) {
+  console.error('Error: launcher profiles file must remain within the selected directory')
+  process.exit(1)
+}
+
+const profile = JSON.parse(fs.readFileSync(profilePath, 'utf8'))
 const auth = profile.authenticationDatabase[profile.selectedUser.account]
 const profileID = profile.selectedUser.profile
 
